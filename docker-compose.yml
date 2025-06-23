@@ -1,0 +1,23 @@
+services:
+  app1:
+    image: nginx-server-app
+    container_name: nginx-server-app-1
+    expose:
+      - "8000"
+
+  app2:
+    image: nginx-server-app
+    container_name: nginx-server-app-2
+    expose:
+      - "8000"
+
+  nginx:
+    image: nginx
+    container_name: nginx-proxy
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app1
+      - app2
