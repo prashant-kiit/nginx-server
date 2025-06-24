@@ -8,15 +8,25 @@ resource "aws_key_pair" "m4_key" {
 }
 
 resource "aws_security_group" "allow_ssh" {
-  name        = "allow_ssh"
+  name = "allow_ssh"
 
+  # Allow SSH
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # open to all for SSH; tighten for security
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # Allow Nginx access on port 8080
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Allow all outbound traffic
   egress {
     from_port   = 0
     to_port     = 0
@@ -24,6 +34,7 @@ resource "aws_security_group" "allow_ssh" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 
 resource "aws_instance" "my_ec2" {
   ami           = "ami-0fc5d935ebf8bc3bc"  # Amazon Linux 2 (for us-east-1)
