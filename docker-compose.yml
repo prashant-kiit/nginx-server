@@ -2,7 +2,7 @@ services:
   app1:
     build:
       context: .
-    image: express-server
+    image: prashantdocker090798/express-server
     container_name: express-server-1
     expose:
       - "8000"
@@ -10,7 +10,7 @@ services:
   app2:
     build:
       context: .
-    image: express-server
+    image: prashantdocker090798/express-server
     container_name: express-server-2
     expose:
       - "8000"
