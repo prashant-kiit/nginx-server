@@ -1,10 +1,11 @@
 FROM node:latest
 
-WORKDIR /app
+WORKDIR /server
 
 COPY dist/ ./dist
-COPY node_modules/ ./node_modules
 COPY package.json .
+
+RUN npm install
 
 EXPOSE 8000
 
