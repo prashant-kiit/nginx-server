@@ -19,7 +19,7 @@
 > eval "$(ssh-agent -s)"
 > ssh-add ~/.ssh/id_rsa_aws
 ---paraphrase issue---
-> ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_aws ubuntu@ec2-34-238-255-177.compute-1.amazonaws.com
+> ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_aws ubuntu@ec2-44-201-166-48.compute-1.amazonaws.com
 > git --version
     > sudo apt update -y
     > sudo apt install -y libz-dev libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext cmake gcc
@@ -44,12 +44,33 @@
 > git pull origin master
 > sudo docker compose up -d --build 
 
-# monitoring
-> sudo docker logs -f nginx-proxy
-
 
 # optimized manual pipeline
-> pnpm install
-> pnpm build
-> docker build -t express-server .
+> npm install
+> npm run build
+> docker build --platform linux/amd64 -t express-server .
+> echo "Prashant123#" | docker login --username "prashantdocker090798" --password-stdin
+> docker tag prashantdocker090798/express-server prashantdocker090798/express-server:latest
+> docker push prashantdocker090798/express-server:latest
+> ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_aws ubuntu@ec2-54-235-224-111.compute-1.amazonaws.com
+> docker --version
+    > sudo apt-get install -y ca-certificates curl
+    > sudo install -m 0755 -d /etc/apt/keyrings
+    > sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    > sudo chmod a+r /etc/apt/keyrings/docker.asc
+    > echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+    > sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+> cd nginx-server
+    > git clone https://github.com/prashant-kiit/nginx-server.git
+    > cd nginx-server
+> echo "Prashant123#" | docker login --username "prashantdocker090798" --password-stdin
+> docker pull prashantdocker090798/express-server:latest
+> docker stop $(docker ps -q)
 > docker compose up -d
+
+# monitoring
+> sudo docker logs -f nginx-proxy
