@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon --watch ./app/server.ts --exec \"tsc && node ./dist/server.js\"",
     "build": "tsc",
-    "start": "node ./dist/server.js"
+    "start": "node ./dist/server.js",
+    "clean": "./clean.sh"
   },
   "keywords": [],
   "author": "",
