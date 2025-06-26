@@ -26,3 +26,4 @@ dist/
 .terraform/
 .terraform.*
 terraform.*
+hosts.ini
