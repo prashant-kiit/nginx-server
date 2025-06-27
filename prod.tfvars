@@ -1,0 +1,1 @@
+ssh_local_path="~/.ssh/id_rsa_aws.pub"

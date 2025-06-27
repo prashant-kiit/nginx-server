@@ -2,9 +2,14 @@ provider "aws" {
   region = "us-east-1"  # Change if needed
 }
 
+variable "ssh_local_path" {
+  description = "SSH Local Path"
+  type        = string
+}
+
 resource "aws_key_pair" "m4_key" {
   key_name   = "m4-key"
-  public_key = file("~/.ssh/id_rsa_aws.pub")
+  public_key = file(var.ssh_local_path)
 }
 
 resource "aws_security_group" "allow_ssh" {
