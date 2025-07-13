@@ -13,7 +13,7 @@
 # manual deployment steps (as we on jenkins server):
 ---one-time----
 > terraform init
-> terraform apply -auto-approve
+> terraform apply -var-file="prod.tfvars" -auto-approve
 ---domain name is needed---
 ---one-time---
 > eval "$(ssh-agent -s)"
