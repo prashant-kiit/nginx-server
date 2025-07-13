@@ -13,6 +13,6 @@ app.post('/api/:id', (req, res) => {
     res.send('POST request received with id: ' + req.params.id);
 });
 
-app.listen(port, () => {
+app.listen(port as number, "0.0.0.0" ,() => {
     console.log(`Server is running on port ${port}`);
 });
