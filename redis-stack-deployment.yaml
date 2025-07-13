@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-stack-deployment
+  labels:
+    app: redis-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-stack
+  template:
+    metadata:
+      labels:
+        app: redis-stack
+    spec:
+      containers:
+      - name: redis
+        image: redis/redis-stack:latest
+        ports:
+        - containerPort: 6379
+        - containerPort: 6380  # RedisInsight (optional)
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-stack-service
+spec:
+  selector:
+    app: redis-stack
+  ports:
+  - name: redis-core
+    protocol: TCP
+    port: 6379
+    targetPort: 6379
+  - name: redis-insight
+    protocol: TCP
+    port: 6380
+    targetPort: 6380
+  type: ClusterIP
