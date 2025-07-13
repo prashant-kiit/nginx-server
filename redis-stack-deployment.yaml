@@ -15,7 +15,7 @@ spec:
         app: redis-stack
     spec:
       containers:
-      - name: redis
+      - name: redis-stack
         image: redis/redis-stack:latest
         ports:
         - containerPort: 6379
@@ -25,6 +25,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: redis-stack-service
+  labels:
+    app: redis-stack
 spec:
   selector:
     app: redis-stack
